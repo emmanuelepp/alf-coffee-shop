@@ -18,6 +18,20 @@ impl MigrationTrait for Migration {
                             .auto_increment()
                             .primary_key(),
                     )
+                    .col(ColumnDef::new(Coffees::UserId).integer().not_null())
+                    .foreign_key(
+                        ForeignKey::create()
+                        .name("fk-coffees-user-id")
+                        .from(Coffees::Table, Coffees::UserId)
+                        .to(User::Table, User::Id)
+                    )
+                    .col(ColumnDef::new(Coffees::ProducerId).integer().not_null())
+                    .foreign_key(
+                        ForeignKey::create()
+                        .name("fk-coffees-Producer_id")
+                        .from(Coffees::Table, Coffees::ProducerId)
+                        .to(Producer::Table, Producer::Id)
+                    )
                     .col(ColumnDef::new(Coffees::Name).string().not_null())
                     .col(ColumnDef::new(Coffees::Type).string().not_null())
                     .col(ColumnDef::new(Coffees::Size).string().not_null())

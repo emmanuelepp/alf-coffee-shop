@@ -22,7 +22,7 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Producer::UserId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-producer-user-id")
+                        .name("fk-producer-user_id")
                         .from(Producer::Table, Author::UserId)
                         .to(User::Table, User::Id)
                     )
