@@ -1,11 +1,11 @@
 use sea_orm_migration::prelude::*;
-use super::m20220101_000001_create_user_table;
+use super::create_user_table::User; 
 
 #[derive(DeriveMigrationName)]
-pub struct Migration;
+pub struct CreateProducerTable; 
 
 #[async_trait::async_trait]
-impl MigrationTrait for Migration {
+impl MigrationTrait for CreateProducerTable {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
             .create_table(
@@ -22,21 +22,21 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Producer::UserId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-producer-user-id")
-                        .from(Producer::Table, Producer::UserId)
-                        .to(User::Table, User::Id)
+                            .name("fk-producer-user-id")
+                            .from(Producer::Table, Producer::UserId)
+                            .to(User::Table, User::Id) // Asegúrate de que User se define correctamente en create_user_table
                     )
                     .col(ColumnDef::new(Producer::CompanyName).string().not_null())
                     .col(ColumnDef::new(Producer::Bio).string().not_null())
                     .col(
                         ColumnDef::new(Producer::CreatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP")
                     )
                     .col(
                         ColumnDef::new(Producer::UpdatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
                     )
                     .to_owned(),
             )

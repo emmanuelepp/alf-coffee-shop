@@ -1,10 +1,12 @@
 use sea_orm_migration::prelude::*;
+use super::create_user_table::User; 
+use super::create_producer_table::Producer;
 
 #[derive(DeriveMigrationName)]
-pub struct Migration;
+pub struct CreateCoffeesTable; 
 
 #[async_trait::async_trait]
-impl MigrationTrait for Migration {
+impl MigrationTrait for CreateCoffeesTable {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
             .create_table(
@@ -21,29 +23,29 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Coffees::UserId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-coffees-user-id")
-                        .from(Coffees::Table, Coffees::UserId)
-                        .to(User::Table, User::Id)
+                            .name("fk-coffees-user-id")
+                            .from(Coffees::Table, Coffees::UserId)
+                            .to(User::Table, User::Id),
                     )
                     .col(ColumnDef::new(Coffees::ProducerId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-coffees-Producer-id")
-                        .from(Coffees::Table, Coffees::ProducerId)
-                        .to(Producer::Table, Producer::Id)
+                            .name("fk-coffees-producer-id")
+                            .from(Coffees::Table, Coffees::ProducerId)
+                            .to(Producer::Table, Producer::Id),
                     )
                     .col(ColumnDef::new(Coffees::Name).string().not_null())
                     .col(ColumnDef::new(Coffees::Type).string().not_null())
                     .col(ColumnDef::new(Coffees::Size).string().not_null())
                     .col(
                         ColumnDef::new(Coffees::CreatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP"),
                     )
                     .col(
                         ColumnDef::new(Coffees::UpdatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
                     )
                     .to_owned(),
             )
@@ -58,7 +60,7 @@ impl MigrationTrait for Migration {
 }
 
 #[derive(DeriveIden)]
-enum Coffees {
+pub enum Coffees {
     Table,
     Id,
     UserId,

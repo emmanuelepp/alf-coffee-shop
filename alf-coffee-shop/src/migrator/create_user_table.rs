@@ -1,10 +1,10 @@
 use sea_orm_migration::prelude::*;
 
 #[derive(DeriveMigrationName)]
-pub struct Migration;
+pub struct CreateUserTable; 
 
 #[async_trait::async_trait]
-impl MigrationTrait for Migration {
+impl MigrationTrait for CreateUserTable {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
             .create_table(
@@ -24,13 +24,13 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(User::Lastname).string().null())
                     .col(
                         ColumnDef::new(User::CreatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP"),
                     )
                     .col(
                         ColumnDef::new(User::UpdatedAt)
-                        .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                            .timestamp()
+                            .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
                     )
                     .to_owned(),
             )
