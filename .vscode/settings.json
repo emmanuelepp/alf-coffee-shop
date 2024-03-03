@@ -1,0 +1,5 @@
+{
+  "rust-analyzer.linkedProjects": [
+    ".\\alf-coffee-shop\\src\\migrator\\Cargo.toml"
+  ]
+}
