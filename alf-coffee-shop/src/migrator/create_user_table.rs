@@ -25,14 +25,13 @@ impl MigrationTrait for Migration {
                     .col(
                         ColumnDef::new(User::CreatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned())
+                        .extra("DEFAULT CURRENT_TIMESTAMP")
                     )
                     .col(
                         ColumnDef::new(User::UpdatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned()))
+                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                    )
                     .to_owned(),
             )
             .await

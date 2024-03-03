@@ -22,23 +22,22 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Producer::UserId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-producer-user_id")
-                        .from(Producer::Table, Author::UserId)
+                        .name("fk-producer-user-id")
+                        .from(Producer::Table, Producer::UserId)
                         .to(User::Table, User::Id)
                     )
-                    .col(ColumnDef::new(Producer::Companyname).string().not_null())
+                    .col(ColumnDef::new(Producer::CompanyName).string().not_null())
                     .col(ColumnDef::new(Producer::Bio).string().not_null())
                     .col(
                         ColumnDef::new(Producer::CreatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned())
+                        .extra("DEFAULT CURRENT_TIMESTAMP")
                     )
                     .col(
                         ColumnDef::new(Producer::UpdatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned()))
+                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                    )
                     .to_owned(),
             )
             .await
@@ -56,7 +55,7 @@ pub enum Producer {
     Table,
     Id,
     UserId,
-    Companyname,
+    CompanyName,
     Bio,
     CreatedAt,
     UpdatedAt,

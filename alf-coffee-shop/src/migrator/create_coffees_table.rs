@@ -28,7 +28,7 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Coffees::ProducerId).integer().not_null())
                     .foreign_key(
                         ForeignKey::create()
-                        .name("fk-coffees-Producer_id")
+                        .name("fk-coffees-Producer-id")
                         .from(Coffees::Table, Coffees::ProducerId)
                         .to(Producer::Table, Producer::Id)
                     )
@@ -38,14 +38,13 @@ impl MigrationTrait for Migration {
                     .col(
                         ColumnDef::new(Coffees::CreatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned())
+                        .extra("DEFAULT CURRENT_TIMESTAMP")
                     )
                     .col(
                         ColumnDef::new(Coffees::UpdatedAt)
                         .timestamp()
-                        .extra("DEFAULT CURRENT_TIMESTAMP"
-                        .to_owned()))
+                        .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                    )
                     .to_owned(),
             )
             .await
