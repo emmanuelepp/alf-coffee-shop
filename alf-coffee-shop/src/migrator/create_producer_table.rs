@@ -24,7 +24,7 @@ impl MigrationTrait for CreateProducerTable {
                         ForeignKey::create()
                             .name("fk-producer-user-id")
                             .from(Producer::Table, Producer::UserId)
-                            .to(User::Table, User::Id) // Asegúrate de que User se define correctamente en create_user_table
+                            .to(User::Table, User::Id)
                     )
                     .col(ColumnDef::new(Producer::CompanyName).string().not_null())
                     .col(ColumnDef::new(Producer::Bio).string().not_null())
