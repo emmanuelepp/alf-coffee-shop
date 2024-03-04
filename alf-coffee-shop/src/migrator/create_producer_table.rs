@@ -1,8 +1,8 @@
 use sea_orm_migration::prelude::*;
-use super::create_user_table::User; 
+use super::create_user_table::User;
 
 #[derive(DeriveMigrationName)]
-pub struct CreateProducerTable; 
+pub struct CreateProducerTable;
 
 #[async_trait::async_trait]
 impl MigrationTrait for CreateProducerTable {
@@ -24,19 +24,19 @@ impl MigrationTrait for CreateProducerTable {
                         ForeignKey::create()
                             .name("fk-producer-user-id")
                             .from(Producer::Table, Producer::UserId)
-                            .to(User::Table, User::Id)
+                            .to(User::Table, User::Id),
                     )
                     .col(ColumnDef::new(Producer::CompanyName).string().not_null())
                     .col(ColumnDef::new(Producer::Bio).string().not_null())
                     .col(
                         ColumnDef::new(Producer::CreatedAt)
                             .timestamp()
-                            .extra("DEFAULT CURRENT_TIMESTAMP")
+                            .extra("DEFAULT CURRENT_TIMESTAMP"),
                     )
                     .col(
                         ColumnDef::new(Producer::UpdatedAt)
                             .timestamp()
-                            .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                            .extra("DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
                     )
                     .to_owned(),
             )

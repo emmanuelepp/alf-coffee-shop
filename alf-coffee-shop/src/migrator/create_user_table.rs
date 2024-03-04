@@ -1,7 +1,7 @@
 use sea_orm_migration::prelude::*;
 
 #[derive(DeriveMigrationName)]
-pub struct CreateUserTable; 
+pub struct CreateUserTable;
 
 #[async_trait::async_trait]
 impl MigrationTrait for CreateUserTable {

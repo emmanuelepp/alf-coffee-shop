@@ -1,15 +1,7 @@
-//========================================================================================
-// Author:   Emmanuel Ponciano
-// Created:  March 3, 2024
-// Purpose:  This project demonstrates how to implement an API server in Rust using Rocket,
-//           SeaORM, and JWT, exploring their integration and functionalities.
-// License:  MIT
-//========================================================================================
+use rocket::{Build, Rocket, fairing::AdHoc};
+use rocket::futures::future::BoxFuture;
 
 #[macro_use] extern crate rocket;
-
-use rocket::{get, routes, Rocket, Build, fairing::AdHoc};
-use rocket::futures::future::BoxFuture;
 
 mod db;
 mod migrator;
@@ -28,7 +20,7 @@ impl AppConfig {
             db_host: std::env::var("COFFEE_SHOP_DB_HOST").unwrap_or_else(|_| "localhost".to_string()),
             db_port: std::env::var("COFFEE_SHOP_DB_PORT").unwrap_or_else(|_| "3306".to_string()),
             db_username: std::env::var("COFFEE_SHOP_DB_USERNAME").unwrap_or_else(|_| "root".to_string()),
-            db_password: std::env::var("COFFEE_SHOP_DB_PASSWORD").unwrap_or_else(|_| "password".to_string()),
+            db_password: std::env::var("COFFEE_SHOP_DB_PASSWORD").unwrap_or_else(|_| "root".to_string()),
             db_database: std::env::var("COFFEE_SHOP_DB_DATABASE").unwrap_or_else(|_| "coffeeshop".to_string()),
         }
     }
@@ -65,4 +57,3 @@ fn rocket() -> Rocket<Build> {
         .mount("/", routes![index])
         .attach(AdHoc::on_ignite("Database Migrations", run_migrations))
 }
-

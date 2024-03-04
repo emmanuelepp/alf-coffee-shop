@@ -1,9 +1,9 @@
 use sea_orm_migration::prelude::*;
-use super::create_user_table::User; 
+use super::create_user_table::User;
 use super::create_producer_table::Producer;
 
 #[derive(DeriveMigrationName)]
-pub struct CreateCoffeesTable; 
+pub struct CreateCoffeesTable;
 
 #[async_trait::async_trait]
 impl MigrationTrait for CreateCoffeesTable {
